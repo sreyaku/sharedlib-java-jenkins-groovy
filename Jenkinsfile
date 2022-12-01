@@ -1,7 +1,6 @@
 @Library('jenkins-shared-library-groovy-practice') _
 pipeline {
     agent any
-
 stages{
         stage('SonarQube Scan'){
             steps {
@@ -10,6 +9,7 @@ stages{
                 }
                
             }
+        }
             stage('Java_build') {
                 steps {
                     script{
@@ -18,9 +18,6 @@ stages{
                 }
             }
         }
-
-        stage ('Deployments'){
-            parallel{
                 stage ("Deploy to Staging"){
                     steps {
                         script{
@@ -29,6 +26,12 @@ stages{
                 }
             }
         }
+    stage ("Upload to S3"){
+        steps {
+            script{
+                upload()
+            }
+        }
+    }
     }
 }
-        }
