@@ -11,14 +11,6 @@
     <name>A custom project using myfaces 1.2 and facelets</name>
     <url>http://www.myorganization.org</url>
 	
-	
-	
-	
-	
- <properties>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
- </properties>
 
     <properties>
         <jsf-myfaces.version>2.2.10</jsf-myfaces.version>
@@ -27,6 +19,8 @@
         <log4j.version>2.2.13</log4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
 	<reporting>
 	    <plugins>
