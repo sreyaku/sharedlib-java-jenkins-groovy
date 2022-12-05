@@ -1,34 +1,37 @@
+@Library('jenkins-shared-library-groovy-practice') _
 pipeline {
     agent any
-    
-    tools {
-        maven 'local_maven'
-    }
-//     parameters {
-//          string(name: 'staging_server', defaultValue: '13.232.37.20', description: 'Remote Staging Server')
-//     }
-
 stages{
-        stage('Build'){
+        stage('SonarQube Scan'){
             steps {
-                bat 'mvn clean package'
+                script{
+                    scan()
+                }
+               
             }
-            post {
-                success {
-                    echo 'Archiving the artifacts'
-                    archiveArtifacts artifacts: '**/target/*.war'
+        }
+            stage('Java_build') {
+                steps {
+                    script{
+                        java_build()
+                
                 }
             }
         }
-
-        stage ('Deployments'){
-            parallel{
                 stage ("Deploy to Staging"){
                     steps {
-                        bat "scp -v -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
-                    }
+                        script{
+                            deploy()
+                       
                 }
             }
         }
+    stage ("Upload to S3"){
+        steps {
+            script{
+                upload()
+            }
+        }
+    }
     }
 }
