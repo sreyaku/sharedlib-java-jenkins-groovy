@@ -16,7 +16,6 @@ stages{
                         java_build()
                 
                 }
-                 
             }
         }
                 stage ("Deploy to Staging"){
@@ -30,10 +29,10 @@ stages{
     stage ("Upload to S3"){
         steps {
             script{
-                archiveArtifacts artifacts: '**/target/*.war'
                 upload()
             }
         }
     }
     }
+}
 
