@@ -16,6 +16,12 @@ stages{
                         java_build()
                 
                 }
+                     post {
+                success {
+                    echo 'Archiving the artifacts'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
             }
         }
                 stage ("Deploy to Staging"){
@@ -26,12 +32,12 @@ stages{
                 }
             }
         }
-    stage ("Upload to S3"){
-        steps {
-            script{
-                upload()
-            }
-        }
+//     stage ("Upload to S3"){
+//         steps {
+//             script{
+//                 upload()
+//             }
+//         }
     }
     }
 }
